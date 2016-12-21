@@ -1,0 +1,29 @@
+{
+  "name": "cordova-plugin-vungle",
+  "version": "1.0.0",
+  "description": "Cordova plugin for Vungle",
+  "cordova": {
+    "id": "cordova-plugin-vungle",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/floatinghotpot/cordova-plugin-vungle.git"
+  },
+  "keywords": [
+    "cordova",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
+    "ad",
+    "vungle",
+    "rjfun"
+  ],
+  "author": {
+    "name": "Liming Xie"
+  },
+  "license": "MIT"
+}

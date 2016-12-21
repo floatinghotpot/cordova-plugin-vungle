@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  id="com.rjfun.cordova.vungle"
+  version="1.0.0">
+      
+  <name>cordova-plugin-vungle</name>
+  <description>Cordova/PhoneGap Plugin for Vungle Ad</description>
+  <author>Liming Xie</author>
+  <license>MIT</license>
+  <keywords>ad,admob,google,play,services,iad,vungle</keywords>
+  <repo>https://github.com/floatinghotpot/cordova-plugin-vungle.git</repo>
+  <issue>https://github.com/floatinghotpot/cordova-plugin-vungle/issues</issue>
+
+  <engines>
+    <engine name="cordova" version=">=3.5" />
+  </engines>
+
+  <js-module src="www/Vungle.js" name="Vungle">
+    <clobbers target="window.Vungle" />
+  </js-module>
+
+  <dependency id="cordova-plugin-extension" />
+  <dependency id="cordova-plugin-cocoapod-support"/>
+  
+  <!-- android -->
+  <platform name="android">
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="Vungle">
+        <param name="android-package" value="com.rjfun.cordova.vungle.VunglePlugin"/>
+      </feature>
+    </config-file>
+    <config-file target="AndroidManifest.xml" parent="/manifest/application">
+      <activity android:name="com.vungle.publisher.VideoFullScreenAdActivity"
+      android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
+      android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+
+      <activity android:name="com.vungle.publisher.MraidFullScreenAdActivity"
+      android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
+      android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+    </config-file>
+    <config-file target="AndroidManifest.xml" parent="/*">
+      <uses-permission android:name="android.permission.INTERNET" />
+      <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18"/>
+      <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    </config-file>
+          
+    <source-file src="src/android/Vungle.java" target-dir="src/com/rjfun/cordova/vungle"/>
+
+    <source-file src="src/android/dagger-2.7.jar" target-dir="libs" />
+    <source-file src="src/android/javax.inject-1.jar" target-dir="libs" />
+    <source-file src="src/android/vungle-publisher-adaptive-id-4.0.3.jar" target-dir="libs" />
+
+  </platform>
+     
+   <!-- ios -->
+   <platform name="ios">
+     <config-file target="config.xml" parent="/*">
+       <feature name="Vungle">
+         <param name="ios-package" value="CDVVungle" />
+       </feature>
+     </config-file>
+     <header-file src="src/ios/CDVVungle.h" />
+     <source-file src="src/ios/CDVVungle.m" />
+
+    <pods-config ios-min-version="9.0" uses-frameworks="true"/>
+    <pod id="VungleSDK-iOS" />
+
+    <!--framework src="src/ios/VungleSDK.embeddedframework" custom="true"/-->
+
+    <framework src="AdSupport.framework"/>
+    <framework src="AudioToolbox.framework"/>
+    <framework src="AVFoundation.framework"/>
+    <framework src="CFNetwork.framework"/>
+    <framework src="CoreGraphics.framework"/>
+    <framework src="CoreMedia.framework"/>
+    <framework src="Foundation.framework"/>
+    <framework src="libz.dylib"/>
+    <framework src="libsqlite3.dylib"/>
+    <framework src="MediaPlayer.framework"/>
+    <framework src="QuartzCore.framework"/>
+    <framework src="StoreKit.framework"/>
+    <framework src="SystemConfiguration.framework"/>
+    <framework src="UIKit.framework"/>
+    <framework src="WebKit.framework" weak="true"/>
+  </platform>
+
+</plugin>

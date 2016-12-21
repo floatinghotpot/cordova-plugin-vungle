@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport"
+  content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+<title>Hello World</title>
+<script type="text/javascript" src="cordova.js"></script>
+<style type="text/css">
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: gray;
+  color: white;
+}
+
+div#fullpage {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0px solid red;
+  text-align: center;
+  vertical-align: middle;
+}
+
+button {
+  font-size: 18px;
+}
+</style>
+</head>
+<body onload="onLoad()" onresize="onResize()">
+  <script>
+
+      function onLoad() {
+          if ((/(ipad|iphone|ipod|android)/i.test(navigator.userAgent))) {
+              document.addEventListener('deviceready', initApp, false);
+          } else {
+              initApp();
+          }
+      }
+
+      var ad_units = {
+          ios : "542f7adb9a76df343f00020e",
+          android : "542f7bb4ba288b5605000028"
+      };
+
+      // select the right Ad Id according to platform
+      var adid = (/(android)/i.test(navigator.userAgent)) ? ad_units.android : ad_units.ios;
+
+      function initApp() {
+          if (! Vungle) {
+              alert('Vungle plugin not ready');
+              return;
+          }
+          Vungle.prepareRewardVideoAd( adid );
+      }
+
+      function showRewardVideoAd() {
+        Vungle.showRewardVideoAd();
+      }
+
+      function onResize() {
+          var s = document.getElementById('info');
+          s.innerHTML = "web view: " + window.innerWidth + " x " + window.innerHeight;
+      }
+  </script>
+  <div id="fullpage">
+      <p>Demo for Vungle Plugin</p>
+
+      <button onclick="showRewardVideoAd();">Play Video Ad</button>
+
+      <div id='info'></div>
+  </div>
+</body>
+</html>
