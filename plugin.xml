@@ -2,7 +2,7 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
-  id="com.rjfun.cordova.vungle"
+  id="cordova-plugin-vungle"
   version="1.0.0">
       
   <name>cordova-plugin-vungle</name>
@@ -22,35 +22,41 @@
   </js-module>
 
   <dependency id="cordova-plugin-extension" />
-  <dependency id="cordova-plugin-cocoapod-support"/>
   
   <!-- android -->
   <platform name="android">
+
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="Vungle">
         <param name="android-package" value="com.rjfun.cordova.vungle.VunglePlugin"/>
       </feature>
     </config-file>
+
     <config-file target="AndroidManifest.xml" parent="/manifest/application">
       <activity android:name="com.vungle.publisher.VideoFullScreenAdActivity"
-      android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
-      android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
 
       <activity android:name="com.vungle.publisher.MraidFullScreenAdActivity"
-      android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
-      android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+        android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+
+      <activity android:name="com.vungle.publisher.FlexViewAdActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
     </config-file>
+
     <config-file target="AndroidManifest.xml" parent="/*">
-      <uses-permission android:name="android.permission.INTERNET" />
-      <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18"/>
+      <!-- permissions to download and cache video ads for playback --> 
+      <uses-permission android:name="android.permission.INTERNET" /> 
+      <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18"/> 
       <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     </config-file>
           
     <source-file src="src/android/Vungle.java" target-dir="src/com/rjfun/cordova/vungle"/>
 
-    <source-file src="src/android/dagger-2.7.jar" target-dir="libs" />
-    <source-file src="src/android/javax.inject-1.jar" target-dir="libs" />
-    <source-file src="src/android/vungle-publisher-adaptive-id-4.0.3.jar" target-dir="libs" />
+    <framework src="src/android/vungle-sdk.gradle" custom="true" type="gradleReference"/>
+    <framework src="com.github.vungle:vungle-android-sdk:5.1.0" />
 
   </platform>
      
@@ -64,10 +70,8 @@
      <header-file src="src/ios/CDVVungle.h" />
      <source-file src="src/ios/CDVVungle.m" />
 
-    <pods-config ios-min-version="9.0" uses-frameworks="true"/>
-    <pod id="VungleSDK-iOS" />
-
-    <!--framework src="src/ios/VungleSDK.embeddedframework" custom="true"/-->
+    <!-- required cordova 6.4.0 or higher -->
+    <framework src="VungleSDK-iOS" type="podspec" spec="~> 5.1.1"/>
 
     <framework src="AdSupport.framework"/>
     <framework src="AudioToolbox.framework"/>
