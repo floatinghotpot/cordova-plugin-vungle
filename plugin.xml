@@ -57,6 +57,7 @@
 
     <framework src="src/android/vungle-sdk.gradle" custom="true" type="gradleReference"/>
     <framework src="com.github.vungle:vungle-android-sdk:5.1.0" />
+    <framework src="com.google.android.gms:play-services-ads:+" />
 
   </platform>
      

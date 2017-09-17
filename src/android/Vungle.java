@@ -17,14 +17,11 @@ public class VunglePlugin extends GenericAdPlugin {
   private String appId = TEST_APPID;
   
   private boolean bVungleInited = false;
-  private VunglePub vunglePub = null;
+  final VunglePub vunglePub = VunglePub.getInstance();
 
   @Override
   protected void pluginInitialize() {
     super.pluginInitialize();
-    
-    // TODO: any init code
-    vunglePub = VunglePub.getInstance();
   }
 
   @Override
